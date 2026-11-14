@@ -8,6 +8,27 @@ public class Principal {
     public static void main(String[] args) {
         int opcion;
         do {
+            System.out.println("=====Inicio de Sesion====");
+            System.out.println("1._ Iniciar Sesion");
+            System.out.println("0._ Salir");
+            opcion = leerEntero("Opcion: ");
+            switch(opcion) {
+                case 1 :
+                    //IniciarSesion();
+                    break;
+                case 0 :
+                    System.out.println("Vuelve pronto!");
+                    break;
+                default :
+                    System.out.println("Opcion no valida");
+            }
+        } while (opcion != 0);
+        sc.close();
+    }
+
+    public static void menuPrincipal(){
+        int opcion;
+        do {
             System.out.println("=====SmartFit360====");
             System.out.println("1._ Gestion de Clientes");
             System.out.println("2._ Gestion de Entrenadores");
@@ -152,6 +173,10 @@ public class Principal {
             }
         } while (opcion != 0);
         sc.close();
+    }
+
+    public void consultarProgreso(){
+
     }
 
     public static int leerEntero(String mensaje) {
