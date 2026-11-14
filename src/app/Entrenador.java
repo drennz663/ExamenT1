@@ -33,7 +33,7 @@ public class Entrenador extends Usuario{
 
     @Override
     public String obtenerRol() {
-        return "Cliente";
+        return "Entrenador";
     }
 
 }
