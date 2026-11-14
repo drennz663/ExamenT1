@@ -2,7 +2,7 @@ package app;
 
 public abstract class Usuario {
     private String codigo;
-    private String nombre;
+    protected String nombre;
     private String correoElectronico;
 
     public Usuario(String codigo, String nombre, String correoElectronico) {
