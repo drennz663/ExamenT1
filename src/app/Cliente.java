@@ -39,5 +39,9 @@ public class Cliente extends Usuario {
         this.planAsignado = planAsignado;
     }
 
-   
+    @Override
+    public String obtenerRol() {
+        return "Cliente";
+    }
+
 }
