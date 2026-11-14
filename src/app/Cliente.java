@@ -44,4 +44,13 @@ public class Cliente extends Usuario {
         return "Cliente";
     }
 
+    public void asignarYConsultarPlan(Plan plan) {
+        this.planAsignado = plan;
+        if (planAsignado != null) {
+            planAsignado.consultarDatos();
+        } else {
+            System.out.println("El cliente no tiene un plan asignado.");
+        }
+    }
+
 }
