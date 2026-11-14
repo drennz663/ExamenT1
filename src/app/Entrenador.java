@@ -3,6 +3,7 @@ package app;
 public class Entrenador extends Usuario{
     private String especialidad;
     private int anhos_experiencia;
+    private Entrenador supervisor;
 
     public Entrenador(String especialidad, int anhos_experiencia) {
         this.especialidad = especialidad;

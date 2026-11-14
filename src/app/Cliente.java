@@ -14,7 +14,7 @@ public class Cliente extends Usuario {
         this.objetivoEntrenamiento = objetivoEntrenamiento;
         this.planAsignado = null;
     }
-    // Metodos Getters y Setters
+
     public int getEdad() {
         return edad;
     }
