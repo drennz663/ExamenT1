@@ -36,5 +36,13 @@ public class Entrenador extends Usuario{
     public String obtenerRol() {
         return "Entrenador";
     }
+    public void asignarSupervisor(Entrenador supervisor) {
+        if (supervisor == this) {
+            System.out.println("Ud no puede ser su propio supervisor");
+        } else {
+            this.supervisor = supervisor;
+            System.out.println(supervisor.getNombre() + " ahora supervisa a " + getNombre());
+        }
+    }
 
 }
