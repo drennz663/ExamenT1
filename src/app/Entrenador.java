@@ -3,6 +3,7 @@ package app;
 public class Entrenador extends Usuario{
     private String especialidad;
     private int anhos_experiencia;
+    private Entrenador supervisor;
 
     public Entrenador(String especialidad, int anhos_experiencia) {
         this.especialidad = especialidad;
@@ -30,4 +31,10 @@ public class Entrenador extends Usuario{
     public void setAnhos_experiencia(int anhos_experiencia) {
         this.anhos_experiencia = anhos_experiencia;
     }
+
+    @Override
+    public String obtenerRol() {
+        return "Entrenador";
+    }
+
 }

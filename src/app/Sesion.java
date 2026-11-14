@@ -9,6 +9,7 @@ public class Sesion {
     private String estado;
     private Cliente client;
     private Entrenador entrenador;
+    private static int duracion_maxima = 120;
 
     public Sesion(String codigo, LocalDate fecha, int duracion_minutos, String estado, Cliente client, Entrenador entrenador) {
         this.codigo = codigo;
