@@ -13,7 +13,6 @@ public abstract class Usuario {
 
     public Usuario() {
     }
-
     public String getCodigo() {
         return codigo;
     }
@@ -37,4 +36,10 @@ public abstract class Usuario {
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
+
+    public abstract String obtenerRol();
+
+
+
+
 }

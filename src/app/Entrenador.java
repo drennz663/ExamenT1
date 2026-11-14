@@ -30,4 +30,10 @@ public class Entrenador extends Usuario{
     public void setAnhos_experiencia(int anhos_experiencia) {
         this.anhos_experiencia = anhos_experiencia;
     }
+
+    @Override
+    public String obtenerRol() {
+        return "Cliente";
+    }
+
 }
