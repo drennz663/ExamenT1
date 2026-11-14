@@ -23,10 +23,10 @@ public class Principal {
                     entrenadoresGestion();
                     break;
                 case 3 :
-                    //planesGestion();
+                    planesGestion();
                     break;
                 case 4:
-                    //sesionGestion();
+                    sesionGestion();
                     break;
                 case 0 :
                     System.out.println("Vuelve pronto!");
@@ -92,6 +92,58 @@ public class Principal {
                     break;
                 case 4:
                     //asignar
+                    break;
+                case 0 :
+                    break;
+                default :
+                    System.out.println("Opcion no valida");
+            }
+        } while (opcion != 0);
+        sc.close();
+    }
+
+    public static void planesGestion(){
+        int opcion;
+        do {
+            System.out.println("=====Seccion de Planes====");
+            System.out.println("1._ Registrar un nuevo plan");
+            System.out.println("2._ Consultar datos del plan");
+            System.out.println("0. Volver");
+            opcion = leerEntero("Opcion: ");
+            switch(opcion) {
+                case 1 :
+                    //registrar
+                    break;
+                case 2 :
+                    //consultar
+                    break;
+                case 0 :
+                    break;
+                default :
+                    System.out.println("Opcion no valida");
+            }
+        } while (opcion != 0);
+        sc.close();
+    }
+
+    public static void sesionGestion(){
+        int opcion;
+        do {
+            System.out.println("=====Seccion de Sesion====");
+            System.out.println("1._ Registrar una nueva sesion");
+            System.out.println("2._ Consultar detalles de la sesion");
+            System.out.println("3._ Marcar sesion como completada");
+            System.out.println("0. Volver");
+            opcion = leerEntero("Opcion: ");
+            switch(opcion) {
+                case 1 :
+                    //registrar
+                    break;
+                case 2 :
+                    //consultar
+                    break;
+                case 3 :
+                    //completar
                     break;
                 case 0 :
                     break;
