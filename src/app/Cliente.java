@@ -1,4 +1,3 @@
-
 package app;
 
 public class Cliente extends Usuario {
@@ -6,6 +5,7 @@ public class Cliente extends Usuario {
     private int edad;
     private String objetivoEntrenamiento;
     private Plan planAsignado;
+    private int telefono;
 
     public Cliente(String codigo, String nombre, String correoElectronico, int edad, String objetivoEntrenamiento) {
         super(codigo, nombre, correoElectronico);
