@@ -1,5 +1,6 @@
 
 package app;
+import java.util.ArrayList;
 
 //herenciavr02
 public class Cliente extends Usuario {
@@ -52,5 +53,19 @@ public class Cliente extends Usuario {
             System.out.println("El cliente no tiene un plan asignado.");
         }
     }
+    
+    public static void registrarCliente(ArrayList<Cliente> clientes, Cliente cliente) {
+
+        for (Cliente c : clientes) {
+            if (c.getCodigo().equals(cliente.getCodigo())) {
+                System.out.println("Cliente duplicado");
+                return;
+            }
+        }
+
+        clientes.add(cliente);
+        System.out.println("Cliente agregado correctamente");
+    }
+
 
 }

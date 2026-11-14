@@ -1,5 +1,7 @@
 package app;
 
+import java.util.ArrayList;
+
 public class Entrenador extends Usuario{
     private String especialidad;
     private int anhos_experiencia;
@@ -30,6 +32,20 @@ public class Entrenador extends Usuario{
     @Override
     public String obtenerRol() {
         return "Entrenador";
+    }
+    
+    public static void registrarEntrenador(
+            ArrayList<Entrenador> entrenadores, Entrenador entrenador) {
+
+        for (Entrenador e : entrenadores) {
+            if (e.getCodigo().equals(entrenador.getCodigo())) {
+                System.out.println("Entrenador duplicado");
+                return;
+            }
+        }
+
+        entrenadores.add(entrenador);
+        System.out.println("Entrenador agregado correctamente");
     }
 
 }
