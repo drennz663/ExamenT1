@@ -3,11 +3,7 @@ package app;
 public class Entrenador extends Usuario{
     private String especialidad;
     private int anhos_experiencia;
-
-    public Entrenador(String especialidad, int anhos_experiencia) {
-        this.especialidad = especialidad;
-        this.anhos_experiencia = anhos_experiencia;
-    }
+    private Entrenador supervisor;
 
     public Entrenador(String codigo, String nombre, String correoElectronico, String especialidad, int anhos_experiencia) {
         super(codigo, nombre, correoElectronico);
