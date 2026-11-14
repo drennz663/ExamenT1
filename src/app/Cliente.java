@@ -1,7 +1,7 @@
 
 package app;
 
-//herencia
+//herenciavr02
 public class Cliente extends Usuario {
 
     private int edad;
