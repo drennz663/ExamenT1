@@ -31,7 +31,7 @@ public class Entrenador extends Usuario{
     public String obtenerRol() {
         return "Entrenador";
     }
-    //Asigno a entrenador de supervisor de entrenador
+    //Asigno a un entrenador como supervisor de entrenador
     public void asignarSupervisor(Entrenador supervisor) {
         if (supervisor == this) {
             System.out.println("Ud no puede ser su propio supervisor");
