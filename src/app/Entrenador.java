@@ -5,11 +5,6 @@ public class Entrenador extends Usuario{
     private int anhos_experiencia;
     private Entrenador supervisor;
 
-    public Entrenador(String especialidad, int anhos_experiencia) {
-        this.especialidad = especialidad;
-        this.anhos_experiencia = anhos_experiencia;
-    }
-
     public Entrenador(String codigo, String nombre, String correoElectronico, String especialidad, int anhos_experiencia) {
         super(codigo, nombre, correoElectronico);
         this.especialidad = especialidad;
