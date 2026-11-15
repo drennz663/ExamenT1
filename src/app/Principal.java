@@ -161,7 +161,7 @@ public class Principal {
             System.out.println("3. Marcar sesion como completada");
             System.out.println("0. Volver");
 
-            opcion = leerEntero("Opcion: ");
+            opcion = leerEntero("Opcion : ");
 
             switch (opcion) {
                 case 1:
