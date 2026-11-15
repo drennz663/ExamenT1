@@ -12,14 +12,13 @@ public class Sesion {
     private Cliente cliente;
     private Entrenador entrenador;
     private static final int duracion_maxima = 120;
-    private static ArrayList<Sesion> sesiones = new ArrayList<>();
 
-    public Sesion(String codigo, LocalDate fecha, int duracion_minutos, String estado, Cliente client, Entrenador entrenador) {
+    public Sesion(String codigo, LocalDate fecha, int duracion_minutos, String estado, Cliente cliente, Entrenador entrenador) {
         this.codigo = codigo;
         this.fecha = fecha;
         this.duracion_minutos = duracion_minutos;
         this.estado = estado;
-        this.cliente = client;
+        this.cliente = cliente;
         this.entrenador = entrenador;
     }
 
@@ -38,7 +37,7 @@ public class Sesion {
         return cliente;
     }
 
-    public void setClient(Cliente client) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
@@ -77,30 +76,77 @@ public class Sesion {
         this.codigo = codigo;
     }
  //registgrar
-    public static void registrarSesion(Scanner sc) {
-        System.out.println("Registrar Sesion");
 
-        System.out.print("Codigo: ");
-        String codigo = sc.nextLine();
+	public static void registrarSesion(ArrayList<Sesion> sesiones, ArrayList<Cliente> clientes, ArrayList<Entrenador> entrenadores, Scanner sc) {
 
-        System.out.print("Fecha(AAAA-MM-DD)");
-        LocalDate fecha = LocalDate.parse(sc.nextLine());
+		System.out.print("Codigo: ");
+		String codigo = sc.nextLine();
 
-        System.out.print("Duracion en minutos: ");
-        int duracion = Integer.parseInt(sc.nextLine());
-        if (duracion > duracion_maxima) {
-            System.out.println("la duracion maxima es de 120 minutos.");
-            return;
-        }
+		for (Sesion s : sesiones) {
+			if (s.getCodigo().equalsIgnoreCase(codigo)) {
+				System.out.println("Sesion duplicada");
+				return;
+			}
+		}
 
-        Sesion nuevaSesion = new Sesion(codigo, fecha, duracion, null, null, null);
+		System.out.print("Fecha (AAAA-MM-DD): ");
+		LocalDate fecha;
+		try {
+			fecha = LocalDate.parse(sc.nextLine());
+		} catch (Exception e) {
+			System.out.println("Fecha invalida");
+			return;
+		}
 
-        sesiones.add(nuevaSesion);
+		System.out.print("Duracion en minutos: ");
+		int duracion;
+		try {
+			duracion = Integer.parseInt(sc.nextLine());
+		} catch (NumberFormatException e) {
+			System.out.println("Duracion invalida");
+			return;
+		}
 
-        System.out.println("Sesion registrada correctamente.");
-    }
+		if (duracion <= 0 || duracion > duracion_maxima) {
+			System.out.println("La duracion debe ser de 1 a 120 minutos");
+			return;
+		}
 
-    public static void consultarSesion(Scanner sc) {
+		System.out.print("Codigo del cliente: ");
+		String codigoCliente = sc.nextLine();
+
+		Cliente cliente = null;
+		for (Cliente c : clientes) {
+			if (c.getCodigo().equalsIgnoreCase(codigoCliente)) {
+				cliente = c;
+				break;
+			}
+		}
+
+		System.out.print("Codigo del entrenador: ");
+		String codigoEntrenador = sc.nextLine();
+
+		Entrenador entrenador = null;
+		for (Entrenador e : entrenadores) {
+			if (e.getCodigo().equalsIgnoreCase(codigoEntrenador)) {
+				entrenador = e;
+				break;
+			}
+		}
+
+		if (cliente == null || entrenador == null) {
+			System.out.println("Cliente o entrenador no encontrado");
+			return;
+		}
+
+		Sesion nuevaSesion = new Sesion(codigo, fecha, duracion, "PENDIENTE", cliente, entrenador);
+
+		sesiones.add(nuevaSesion);
+
+		System.out.println("Sesion registrada correctamente");
+	}
+
+    public static void consultarSesion(ArrayList<Sesion> sesiones, Scanner sc) {
         System.out.println("Ingrese el codigo de la sesion:");
         String codigo = sc.nextLine();
 
@@ -112,14 +158,15 @@ public class Sesion {
                 System.out.println("Codigo: " + sesion.getCodigo());
                 System.out.println("Fecha: " + sesion.getFecha());
                 System.out.println("Duracion: " + sesion.getDuracion_minutos() + " minutos");
-                System.out.println("Estado: " + sesion.getEstado());
+        		System.out.println("Estado: " + sesion.getEstado());
+        		
                 return;
             }
         }
         System.out.println("No se encontro una sesion con ese codigo.");
     }
 
-    public static void completarSesion(Scanner sc) {
+    public static void completarSesion(ArrayList<Sesion> sesiones, Scanner sc) {
 
         System.out.println("Ingrese el codigo de la sesion:");
         String codigo = sc.nextLine();
@@ -128,7 +175,7 @@ public class Sesion {
 
             if (sesion.getCodigo().equalsIgnoreCase(codigo)) {
 
-                sesion.setEstado("Completada");
+                sesion.setEstado("COMPLETADA");
 
                 System.out.println("Sesion marcada como completada.");
                 return;

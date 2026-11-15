@@ -194,13 +194,13 @@ public class Principal {
             opcion = leerEntero("Opcion: ");
             switch(opcion) {
                 case 1 :
-                    Sesion.registrarSesion(sc);
+                    Sesion.registrarSesion(sesiones, clientes, entrenadores, sc);;
                     break;
                 case 2 :
-                	Sesion.consultarSesion(sc);
+                	Sesion.consultarSesion(sesiones,sc);
                     break;
                 case 3 :
-                    Sesion.completarSesion(sc);
+                    Sesion.completarSesion(sesiones, sc);
                     break;
                 case 0 :
                     break;
