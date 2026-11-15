@@ -1,5 +1,8 @@
 package app;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Plan {
 	protected String codigo;
 	protected String nombre;
@@ -49,11 +52,45 @@ public class Plan {
     }
 
     public void consultarDatos() {
+    	System.out.println("---------------------------");
         System.out.println("Código: " + codigo);
         System.out.println("Nombre: " + nombre);
         System.out.println("Nivel de dificultad: " + nivel_dificultad);
         System.out.println("Cantidad de sesiones: " + cantidad_sesiones);
     }
 
+    public static void registrarPlan(ArrayList<Plan> planes, Scanner sc) {
+        System.out.print("Codigo: "); 
+        String codigo = sc.nextLine();
 
+        for (Plan p : planes) {
+            if (p.codigo.equalsIgnoreCase(codigo)) {
+                System.out.println("Plan duplicado");
+                return;
+            }
+        }
+
+        System.out.print("Nombre: ");
+        String nombre = sc.nextLine();
+
+        System.out.print("Nivel de dificultad: ");
+        String nivel = sc.nextLine();
+
+        int sesiones;
+        try {
+            System.out.print("Cantidad de sesiones: ");
+            sesiones = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Cantidad invalida");
+            return;
+        }
+
+        if (sesiones <= 0) {
+            System.out.println("Cantidad invalida");
+            return;
+        }
+
+        planes.add(new Plan(codigo, nombre, nivel, sesiones));
+        System.out.println("Plan agregado correctamente");
+    }
 }

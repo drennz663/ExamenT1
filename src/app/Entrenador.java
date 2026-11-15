@@ -37,6 +37,23 @@ public class Entrenador extends Usuario implements Evaluable, Reporteable{
         return "Entrenador";
     }
     
+
+	public static void mostrarDatosEntrenador(ArrayList<Entrenador> entrenadores, Scanner sc) {
+
+		System.out.print("Codigo: ");
+		String codigo = sc.nextLine();
+
+		for (Entrenador e : entrenadores) {
+			if (e.getCodigo().equalsIgnoreCase(codigo)) {
+				e.mostrarDatos();
+				return;
+			}
+		}
+
+		System.out.println("El entrenador no existe");
+	}
+
+    
     public static void registrarEntrenador(ArrayList<Entrenador> entrenadores, Scanner sc) {
 
         System.out.print("Codigo: ");
@@ -80,14 +97,37 @@ public class Entrenador extends Usuario implements Evaluable, Reporteable{
         System.out.println("Entrenador agregado correctamente");
     }
     // Asigno a otro entrenador como supervisor de este
-    public void asignarSupervisor(Entrenador supervisor) {
-        if (supervisor == this) {
-            System.out.println("Un entrenador no puede supervisarse a sí mismo.");
-            return;
-        }
-        this.supervisor = supervisor;
-        System.out.println(supervisor.nombre + " ahora supervisa a " + this.nombre);
-    }
+
+	public static void asignarSupervisor(ArrayList<Entrenador> entrenadores, Scanner sc) {
+
+		System.out.print("Codigo del entrenador: ");
+		String codigo = sc.nextLine();
+
+		System.out.print("Codigo del supervisor: ");
+		String codigoSupervisor = sc.nextLine();
+
+		Entrenador entrenador = null;
+		Entrenador supervisor = null;
+
+		for (Entrenador e : entrenadores) {
+			if (e.getCodigo().equalsIgnoreCase(codigo)) {
+				entrenador = e;
+			}
+			if (e.getCodigo().equalsIgnoreCase(codigoSupervisor)) {
+				supervisor = e;
+			}
+		}
+
+		if (entrenador == null || supervisor == null || entrenador == supervisor) {
+			System.out.println("Entrenador o supervisor invalido");
+			return;
+		}
+
+		entrenador.supervisor = supervisor;
+
+		System.out.println(supervisor.getNombre() + " ahora supervisa a " + entrenador.getNombre());
+	}
+
 
     public String consultarSupervisor() {
         if (supervisor == null) {
@@ -109,6 +149,41 @@ public class Entrenador extends Usuario implements Evaluable, Reporteable{
             System.out.println("Resultado: el cliente aún no tiene un plan asignado.");
         }
     }
+    
+	public static void reporteSeguimiento(ArrayList<Cliente> clientes, ArrayList<Entrenador> entrenadores, Scanner sc) {
+
+		System.out.print("Codigo del entrenador: ");
+		String codigoEntrenador = sc.nextLine();
+
+		System.out.print("Codigo del cliente: ");
+		String codigoCliente = sc.nextLine();
+
+		Entrenador entrenador = null;
+		Cliente cliente = null;
+
+		for (Entrenador e : entrenadores) {
+			if (e.getCodigo().equalsIgnoreCase(codigoEntrenador)) {
+				entrenador = e;
+				break;
+			}
+		}
+
+		for (Cliente c : clientes) {
+			if (c.getCodigo().equalsIgnoreCase(codigoCliente)) {
+				cliente = c;
+				break;
+			}
+		}
+
+		if (entrenador == null || cliente == null) {
+			System.out.println("Entrenador o cliente no encontrado");
+			return;
+		}
+
+		entrenador.evaluarProgreso(cliente);
+		System.out.println(entrenador.generarReporte(cliente));
+	}
+
 
     // Implementación de Reporteable
     @Override

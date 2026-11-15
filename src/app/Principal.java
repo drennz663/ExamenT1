@@ -1,31 +1,44 @@
 package app;
 
-<<<<<<< HEAD
-=======
+
 import java.time.LocalDate;
->>>>>>> 7727c1fc2e68c62c06741add7500611f518ce19a
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Principal {
 
     static Scanner sc = new Scanner(System.in);
-<<<<<<< HEAD
-    
-    static ArrayList<Cliente> clientes = new ArrayList<>();
-    static ArrayList<Entrenador> entrenadores = new ArrayList<>();
-    
-    public static void main(String[] args) {
-    	entrenadores.add(new Entrenador("001", "Administrador", "admin@smartfit.com", "Administracion", 10));
-=======
+
     static ArrayList<Cliente> clientes = new ArrayList<>();
     static ArrayList<Entrenador> entrenadores = new ArrayList<>();
     static ArrayList<Registro> registros = new ArrayList<>();
+    static ArrayList<Plan> planes = new ArrayList<>();
+    static ArrayList<Sesion> sesiones = new ArrayList<>();
+    
     public static void main(String[] args) {
-    	entrenadores.add(new Entrenador("001", "Administrador", "admin@smartfit.com", "Administracion", 10));
-        clientes.add(new Cliente("002","unCliente","SoyunCliente@gmail.com",21,"Salud"));
+    	
+    	entrenadores.add(new Entrenador("E001", "Administrador", "admin@smartfit.com", "Administracion", 10));
+    	entrenadores.add(new Entrenador("E002", "OtroEntrenador", "entrenarIsFun@gmail.com", "Entrenamiento fisico", 10));
+    	
+        clientes.add(new Cliente("C001","unCliente","SoyunCliente@gmail.com",21,"Salud"));   
+        clientes.add(new Cliente("C002","otroCliente","YeeeOtroCliente@gmail.com",32,"Mejora fisica"));
+
         registros.add(new Registro("R01",clientes.get(0),entrenadores.get(0),LocalDate.parse("2026-01-01"),4 ,"Mantener una dieta estable"));
->>>>>>> 7727c1fc2e68c62c06741add7500611f518ce19a
+        registros.add(new Registro("R01",clientes.get(0),entrenadores.get(0),LocalDate.parse("2026-01-01"),4 ,"Mantener una dieta estable"));
+        
+        planes.add(new Plan("P001","Graciela Plan","fuerza total",20));
+        planes.add(new Plan("P002","Easy plan","ba1sico, para aprender",7));
+        planes.add(new Plan("P003","Medium plan","Ponle mas energia",13));
+        planes.add(new Plan("P004","Andy Plan","plan de mejora total",20));
+        planes.add(new Plan("P005","Hardcore plan","Muy alta, ponle todo tu empeño",35));
+        
+        
+        sesiones.add(new Sesion("S001",LocalDate.parse("2027-01-01"),100, "PENDIENTE", clientes.get(0), entrenadores.get(0)));
+        sesiones.add(new Sesion("S002",LocalDate.parse("2026-11-11"),110, "COMPLETADA", clientes.get(0), entrenadores.get(1)));
+        sesiones.add(new Sesion("S003",LocalDate.parse("2026-12-10"),100, "PENDIENTE", clientes.get(1), entrenadores.get(0)));
+        sesiones.add(new Sesion("S004",LocalDate.parse("2027-01-02"),100, "PENDIENTE", clientes.get(1), entrenadores.get(1)));
+        
         int opcion;
         do {
             System.out.println("=====Inicio de Sesion====");
@@ -94,10 +107,10 @@ public class Principal {
                 	Cliente.registrarCliente(clientes, sc);
                     break;
                 case 2 :
-                    //Consultar
+                    Cliente.mostrarDatosCliente(clientes, sc);
                     break;
                 case 3 :
-                    //Asignar
+                	Cliente.asignarPlanCliente(clientes, planes, sc);
                     break;
                 case 4:
                     Cliente.consultarProgreso(clientes,registros,sc);
@@ -126,13 +139,13 @@ public class Principal {
                 	Entrenador.registrarEntrenador(entrenadores, sc);
                     break;
                 case 2 :
-                    //consultar
+                	Entrenador.mostrarDatosEntrenador(entrenadores, sc);
                     break;
                 case 3 :
-                    //generar
+                	Entrenador.reporteSeguimiento(clientes, entrenadores, sc);
                     break;
                 case 4:
-                    //asignar
+                    Entrenador.asignarSupervisor(entrenadores, sc);
                     break;
                 case 0 :
                     break;
@@ -153,10 +166,13 @@ public class Principal {
             opcion = leerEntero("Opcion: ");
             switch(opcion) {
                 case 1 :
-                    //registrar
+                    Plan.registrarPlan(planes, sc);
                     break;
                 case 2 :
-                    //consultar
+                	for (Plan p : planes) {
+                        p.consultarDatos();
+                	}
+
                     break;
                 case 0 :
                     break;
@@ -178,13 +194,13 @@ public class Principal {
             opcion = leerEntero("Opcion: ");
             switch(opcion) {
                 case 1 :
-                    //registrar
+                    Sesion.registrarSesion(sc);
                     break;
                 case 2 :
-                    //consultar
+                	Sesion.consultarSesion(sc);
                     break;
                 case 3 :
-                    //completar
+                    Sesion.completarSesion(sc);
                     break;
                 case 0 :
                     break;
@@ -223,11 +239,8 @@ public static void menuCliente(Cliente cliente) {
                 break;
 
             case 3:
-<<<<<<< HEAD
-                //cliente.consultarProgreso();
-=======
                 Cliente.consultarProgreso(clientes,registros,sc);
->>>>>>> 7727c1fc2e68c62c06741add7500611f518ce19a
+
                 break;
 
             case 0:

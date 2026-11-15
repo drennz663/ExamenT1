@@ -8,7 +8,6 @@ public class Cliente extends Usuario {
     private int edad;
     private String objetivoEntrenamiento;
     protected Plan planAsignado;
-    private int telefono;
 
     public Cliente(String codigo, String nombre, String correoElectronico, int edad, String objetivoEntrenamiento) {
         super(codigo, nombre, correoElectronico);
@@ -45,15 +44,59 @@ public class Cliente extends Usuario {
     public String obtenerRol() {
         return "Cliente";
     }
+    
+   
 
-    public void asignarYConsultarPlan(Plan plan) {
-        this.planAsignado = plan;
-        if (planAsignado != null) {
-            planAsignado.consultarDatos();
-        } else {
-            System.out.println("El cliente no tiene un plan asignado.");
-        }
-    }
+	public static void asignarPlanCliente(ArrayList<Cliente> clientes, ArrayList<Plan> planes, Scanner sc) {
+
+	    System.out.print("Codigo del cliente: ");
+	    String codigo = sc.nextLine();
+
+	    Cliente cliente = null;
+	    for (Cliente c : clientes) {
+	        if (c.getCodigo().equalsIgnoreCase(codigo)) {
+	            cliente = c;
+	        }
+	    }   
+
+	    if (cliente == null) {
+	        System.out.println("El cliente no existe");
+	        return;
+	    }
+
+	    System.out.print("Codigo del plan: ");
+	    String codigoPlan = sc.nextLine();
+
+	    Plan plan = null;
+	    for (Plan p : planes) {
+	        if (p.getCodigo().equalsIgnoreCase(codigoPlan)) {
+	            plan = p;
+	        }
+	    }
+	    if (plan == null) {
+	        System.out.println("El plan no existe");
+	        return;
+	    }
+	    cliente.setPlanAsignado(plan);
+	    System.out.println("Plan asignado correctamente");
+	}    
+    
+	public static void mostrarDatosCliente(ArrayList<Cliente> clientes, Scanner sc) {
+
+		System.out.print("Codigo: ");
+		String codigo = sc.nextLine();
+
+		for (Cliente c : clientes) {
+			if (c.getCodigo().equalsIgnoreCase(codigo)) {
+				c.mostrarDatos();
+				return;
+			}
+		}
+
+		System.out.println("El cliente no existe");
+	}
+
+
 
 	public static void registrarCliente(ArrayList<Cliente> clientes, Scanner sc) {
 
@@ -97,9 +140,6 @@ public class Cliente extends Usuario {
 		System.out.println("Cliente agregado correctamente");
 	}
 
-<<<<<<< HEAD
-
-=======
     public static void consultarProgreso(ArrayList<Cliente> clientes,ArrayList<Registro> registros,Scanner sc ){
         boolean existe = false;
         System.out.println("Codigo :");
@@ -129,5 +169,19 @@ public class Cliente extends Usuario {
             System.out.println("El cliente no existe. ¿Ingresaste el codigo bien?");
         }
     }
->>>>>>> 7727c1fc2e68c62c06741add7500611f518ce19a
+    
+	@Override
+	public void mostrarDatos() {
+		super.mostrarDatos();
+
+		System.out.println("Edad: " + edad);
+		System.out.println("Objetivo: " + objetivoEntrenamiento);
+
+		if (planAsignado == null) {
+			System.out.println("No tiene plan asignado");
+		} else {
+			System.out.println("Plan asignado: " + planAsignado.getNombre());
+		}
+	}
+    
 }
