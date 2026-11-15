@@ -9,6 +9,7 @@ public class Principal {
     static ArrayList<Cliente> clientes = new ArrayList<>();
     static ArrayList<Entrenador> entrenadores = new ArrayList<>();
     public static void main(String[] args) {
+    	entrenadores.add(new Entrenador("001", "Administrador", "admin@smartfit.com", "Administracion", 10));
         int opcion;
         do {
             System.out.println("=====Inicio de Sesion====");
@@ -17,7 +18,7 @@ public class Principal {
             opcion = leerEntero("Opcion: ");
             switch(opcion) {
                 case 1 :
-                    //IniciarSesion();
+                	iniciarSesion();
                     break;
                 case 0 :
                     System.out.println("Vuelve pronto!");
@@ -53,13 +54,13 @@ public class Principal {
                     sesionGestion();
                     break;
                 case 0 :
-                    System.out.println("Vuelve pronto!");
+                	System.out.println("Sesion cerrada");
                     break;
                 default :
                     System.out.println("Opcion no valida");
             }
         } while (opcion != 0);
-        sc.close();
+     
     }
 
     public static void clienteGestion(){
@@ -91,7 +92,7 @@ public class Principal {
                     System.out.println("Opcion no valida");
             }
         } while (opcion != 0);
-        sc.close();
+    
     }
 
     public static void entrenadoresGestion(){
@@ -123,7 +124,7 @@ public class Principal {
                     System.out.println("Opcion no valida");
             }
         } while (opcion != 0);
-        sc.close();
+      
     }
 
     public static void planesGestion(){
@@ -147,7 +148,7 @@ public class Principal {
                     System.out.println("Opcion no valida");
             }
         } while (opcion != 0);
-        sc.close();
+       
     }
 
     public static void sesionGestion(){
@@ -175,12 +176,52 @@ public class Principal {
                     System.out.println("Opcion no valida");
             }
         } while (opcion != 0);
-        sc.close();
+     
     }
 
-    public void consultarProgreso(){
 
-    }
+public static void menuCliente(Cliente cliente) {
+
+    int opcion;
+
+    do {
+        System.out.println("\n===== MENU CLIENTE =====");
+        System.out.println("1._ Consultar mis datos");
+        System.out.println("2._ Consultar mi plan");
+        System.out.println("3._ Consultar mi progreso");
+        System.out.println("0._ Cerrar sesion");
+
+        opcion = leerEntero("Opcion: ");
+
+        switch (opcion) {
+            case 1:
+                cliente.mostrarDatos();
+                break;
+
+            case 2:
+                if (cliente.getPlanAsignado() != null) {
+                    cliente.getPlanAsignado().consultarDatos();
+                } else {
+                    System.out.println("No tiene plan asignado");
+                }
+                break;
+
+            case 3:
+                //cliente.consultarProgreso();
+                break;
+
+            case 0:
+                System.out.println("Sesion cerrada");
+                break;
+
+            default:
+                System.out.println("Opcion no valida");
+        }
+
+    } while (opcion != 0);
+}
+    
+   
 
     public static int leerEntero(String mensaje) {
         while (true) {
@@ -192,5 +233,43 @@ public class Principal {
             }
         }
     }
+    
+
+
+	public static void iniciarSesion() {
+
+		System.out.print("Ingrese su correo: ");
+		String correo = sc.nextLine();
+
+		Usuario usuario = null;
+
+		for (Cliente c : clientes) {
+			if (c.getCorreoElectronico().equalsIgnoreCase(correo)) {
+				usuario = c;
+				break;
+			}
+		}
+
+		for (Entrenador e : entrenadores) {
+			if (usuario == null && e.getCorreoElectronico().equalsIgnoreCase(correo)) {
+				usuario = e;
+				break;
+			}
+		}
+
+		if (usuario == null) {
+			System.out.println("Correo no registrado");
+			return;
+		}
+
+		System.out.println("Bienvenido: " + usuario.getNombre());
+
+		if (usuario.obtenerRol().equals("Cliente")) {
+			menuCliente((Cliente) usuario);
+		} else {
+			menuPrincipal();
+		}
+	}
+
 
 }
