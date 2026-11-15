@@ -1,35 +1,36 @@
 package app;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Principal {
 
-	static Scanner sc = new Scanner(System.in);
-	static ArrayList<Cliente> clientes = new ArrayList<>();
-	static ArrayList<Entrenador> entrenadores = new ArrayList<>();
-
-	public static void main(String[] args) {
-		entrenadores.add(new Entrenador("001", "Administrador", "admin@smartfit.com", "Administracion", 10));
-		int opcion;
-		do {
-			System.out.println("=====Inicio de Sesion====");
-			System.out.println("1._ Iniciar Sesion");
-			System.out.println("0._ Salir");
-			opcion = leerEntero("Opcion: ");
-			switch (opcion) {
-			case 1:
-				iniciarSesion();
-				break;
-			case 0:
-				System.out.println("Vuelve pronto!");
-				break;
-			default:
-				System.out.println("Opcion no valida");
-			}
-		} while (opcion != 0);
-		sc.close();
-	}
+    static Scanner sc = new Scanner(System.in);
+    static ArrayList<Cliente> clientes = new ArrayList<>();
+    static ArrayList<Entrenador> entrenadores = new ArrayList<>();
+    public static void main(String[] args) {
+    	entrenadores.add(new Entrenador("001", "Administrador", "admin@smartfit.com", "Administracion", 10));
+        int opcion;
+        do {
+            System.out.println("=====Inicio de Sesion====");
+            System.out.println("1._ Iniciar Sesion");
+            System.out.println("0._ Salir");
+            opcion = leerEntero("Opcion: ");
+            switch(opcion) {
+                case 1 :
+                	iniciarSesion();
+                    break;
+                case 0 :
+                    System.out.println("Vuelve pronto!");
+                    break;
+                default :
+                    System.out.println("Opcion no valida");
+            }
+        } while (opcion != 0);
+        sc.close();
+    }
 
 	public static void menuPrincipal() {
 		int opcion;
@@ -152,33 +153,33 @@ public class Principal {
 
 	}
 
-	public static void sesionGestion() {
-		int opcion;
-		do {
-			System.out.println("=====Seccion de Sesion====");
-			System.out.println("1._ Registrar una nueva sesion");
-			System.out.println("2._ Consultar detalles de la sesion");
-			System.out.println("3._ Marcar sesion como completada");
-			System.out.println("0. Volver");
-			opcion = leerEntero("Opcion: ");
-			switch (opcion) {
-			case 1:
-				// registrar
-				break;
-			case 2:
-				// consultar
-				break;
-			case 3:
-				// completar
-				break;
-			case 0:
-				break;
-			default:
-				System.out.println("Opcion no valida");
-			}
-		} while (opcion != 0);
-
-	}
+    public static void sesionGestion(){
+        int opcion;
+        do {
+            System.out.println("=====Seccion de Sesion====");
+            System.out.println("1._ Registrar una nueva sesion");
+            System.out.println("2._ Consultar detalles de la sesion");
+            System.out.println("3._ Marcar sesion como completada");
+            System.out.println("0. Volver");
+            opcion = leerEntero("Opcion: ");
+            switch(opcion) {
+                case 1 :
+                    //registrar
+                    break;
+                case 2 :
+                    //consultar
+                    break;
+                case 3 :
+                    //completar
+                    break;
+                case 0 :
+                    break;
+                default :
+                    System.out.println("Opcion no valida");
+            }
+        } while (opcion != 0);
+     
+    }
 
 	public static void menuCliente(Cliente cliente) {
 
@@ -221,16 +222,18 @@ public class Principal {
 		} while (opcion != 0);
 	}
 
-	public static int leerEntero(String mensaje) {
-		while (true) {
-			System.out.print(mensaje);
-			try {
-				return Integer.parseInt(sc.nextLine().trim());
-			} catch (NumberFormatException e) {
-				System.out.println("Ingrese un numero valido");
-			}
-		}
-	}
+    public static int leerEntero(String mensaje) {
+        while (true) {
+            System.out.print(mensaje);
+            try {
+                return Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese un numero valido");
+            }
+        }
+    }
+    
+
 
 	public static void iniciarSesion() {
 
