@@ -72,9 +72,7 @@ public class Entrenador extends Usuario{
             return;
         }
 
-        Entrenador entrenador = new Entrenador(
-            codigo, nombre, correo, especialidad, experiencia
-        );
+        Entrenador entrenador = new Entrenador(codigo, nombre, correo, especialidad, experiencia);
 
         entrenadores.add(entrenador);
 
