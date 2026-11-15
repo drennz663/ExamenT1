@@ -1,25 +1,29 @@
 package app;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Principal {
 
     static Scanner sc = new Scanner(System.in);
+    static ArrayList<Cliente> clientes = new ArrayList<>();
+    static ArrayList<Entrenador> entrenadores = new ArrayList<>();
+    static ArrayList<Registro> registros = new ArrayList<>();
     public static void main(String[] args) {
+    	entrenadores.add(new Entrenador("001", "Administrador", "admin@smartfit.com", "Administracion", 10));
+        clientes.add(new Cliente("002","unCliente","SoyunCliente@gmail.com",21,"Salud"));
+        registros.add(new Registro("R01",clientes.get(0),entrenadores.get(0),LocalDate.parse("2026-01-01"),4 ,"Mantener una dieta estable"));
         int opcion;
         do {
             System.out.println("=====Inicio de Sesion====");
             System.out.println("1._ Iniciar Sesion");
-            System.out.println("4._ sesion Gestion");
             System.out.println("0._ Salir");
             opcion = leerEntero("Opcion: ");
             switch(opcion) {
                 case 1 :
-                    //IniciarSesion();
+                	iniciarSesion();
                     break;
-                case 4:
-                    sesionGestion();
                 case 0 :
                     System.out.println("Vuelve pronto!");
                     break;
@@ -54,13 +58,13 @@ public class Principal {
                     sesionGestion();
                     break;
                 case 0 :
-                    System.out.println("Vuelve pronto!");
+                	System.out.println("Sesion cerrada");
                     break;
                 default :
                     System.out.println("Opcion no valida");
             }
         } while (opcion != 0);
-        sc.close();
+     
     }
 
     public static void clienteGestion(){
@@ -75,7 +79,7 @@ public class Principal {
             opcion = leerEntero("Opcion: ");
             switch(opcion) {
                 case 1 :
-                    //Crear
+                	Cliente.registrarCliente(clientes, sc);
                     break;
                 case 2 :
                     //Consultar
@@ -84,7 +88,7 @@ public class Principal {
                     //Asignar
                     break;
                 case 4:
-                    //Progreso
+                    Cliente.consultarProgreso(clientes,registros,sc);
                     break;
                 case 0 :
                     break;
@@ -92,7 +96,7 @@ public class Principal {
                     System.out.println("Opcion no valida");
             }
         } while (opcion != 0);
-        sc.close();
+    
     }
 
     public static void entrenadoresGestion(){
@@ -107,7 +111,7 @@ public class Principal {
             opcion = leerEntero("Opcion: ");
             switch(opcion) {
                 case 1 :
-                    //registrar
+                	Entrenador.registrarEntrenador(entrenadores, sc);
                     break;
                 case 2 :
                     //consultar
@@ -124,7 +128,7 @@ public class Principal {
                     System.out.println("Opcion no valida");
             }
         } while (opcion != 0);
-        sc.close();
+      
     }
 
     public static void planesGestion(){
@@ -148,43 +152,80 @@ public class Principal {
                     System.out.println("Opcion no valida");
             }
         } while (opcion != 0);
-        sc.close();
+       
     }
 
-    public static void sesionGestion() {
+    public static void sesionGestion(){
         int opcion;
-
         do {
-            System.out.println("===== Seccion de Sesion =====");
-            System.out.println("1. Registrar una nueva sesion");
-            System.out.println("2. Consultar detalles de la sesion");
-            System.out.println("3. Marcar sesion como completada");
+            System.out.println("=====Seccion de Sesion====");
+            System.out.println("1._ Registrar una nueva sesion");
+            System.out.println("2._ Consultar detalles de la sesion");
+            System.out.println("3._ Marcar sesion como completada");
             System.out.println("0. Volver");
-
-            opcion = leerEntero("Opcion : ");
-
-            switch (opcion) {
-                case 1:
-                    Sesion.registrarSesion(sc);
+            opcion = leerEntero("Opcion: ");
+            switch(opcion) {
+                case 1 :
+                    //registrar
                     break;
-                case 2:
-                    Sesion.consultarSesion(sc);
+                case 2 :
+                    //consultar
                     break;
-                case 3:
-                    Sesion.completarSesion(sc);
+                case 3 :
+                    //completar
                     break;
-                case 0:
+                case 0 :
                     break;
-                default:
+                default :
                     System.out.println("Opcion no valida");
             }
-
         } while (opcion != 0);
+     
     }
 
-    public void consultarProgreso(){
 
-    }
+public static void menuCliente(Cliente cliente) {
+
+    int opcion;
+
+    do {
+        System.out.println("\n===== MENU CLIENTE =====");
+        System.out.println("1._ Consultar mis datos");
+        System.out.println("2._ Consultar mi plan");
+        System.out.println("3._ Consultar mi progreso");
+        System.out.println("0._ Cerrar sesion");
+
+        opcion = leerEntero("Opcion: ");
+
+        switch (opcion) {
+            case 1:
+                cliente.mostrarDatos();
+                break;
+
+            case 2:
+                if (cliente.getPlanAsignado() != null) {
+                    cliente.getPlanAsignado().consultarDatos();
+                } else {
+                    System.out.println("No tiene plan asignado");
+                }
+                break;
+
+            case 3:
+                Cliente.consultarProgreso(clientes,registros,sc);
+                break;
+
+            case 0:
+                System.out.println("Sesion cerrada");
+                break;
+
+            default:
+                System.out.println("Opcion no valida");
+        }
+
+    } while (opcion != 0);
+}
+    
+   
 
     public static int leerEntero(String mensaje) {
         while (true) {
@@ -196,5 +237,43 @@ public class Principal {
             }
         }
     }
+    
+
+
+	public static void iniciarSesion() {
+
+		System.out.print("Ingrese su correo: ");
+		String correo = sc.nextLine();
+
+		Usuario usuario = null;
+
+		for (Cliente c : clientes) {
+			if (c.getCorreoElectronico().equalsIgnoreCase(correo)) {
+				usuario = c;
+				break;
+			}
+		}
+
+		for (Entrenador e : entrenadores) {
+			if (usuario == null && e.getCorreoElectronico().equalsIgnoreCase(correo)) {
+				usuario = e;
+				break;
+			}
+		}
+
+		if (usuario == null) {
+			System.out.println("Correo no registrado");
+			return;
+		}
+
+		System.out.println("Bienvenido: " + usuario.getNombre());
+
+		if (usuario.obtenerRol().equals("Cliente")) {
+			menuCliente((Cliente) usuario);
+		} else {
+			menuPrincipal();
+		}
+	}
+
 
 }

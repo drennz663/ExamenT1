@@ -97,4 +97,33 @@ public class Cliente extends Usuario {
 		System.out.println("Cliente agregado correctamente");
 	}
 
+    public static void consultarProgreso(ArrayList<Cliente> clientes,ArrayList<Registro> registros,Scanner sc ){
+        boolean existe = false;
+        System.out.println("Codigo :");
+        String codigo = sc.nextLine();
+
+        for(Cliente c :clientes ){
+            if(c.getCodigo().equalsIgnoreCase(codigo)) {
+                existe = true;
+                boolean posee_registro = false;
+                for (Registro r : registros) {
+                    if (r.getClient().getCodigo().equalsIgnoreCase(c.getCodigo())) {
+                        posee_registro = true;
+                        System.out.println("Codigo : " + r.getCodigo());
+                        System.out.println("Nombre del Cliente :" + c.nombre);
+                        System.out.println("Nombre del entrenador :" + r.getEntrenador().getNombre());
+                        System.out.println("Fecha de realizacion :" + r.getFecha());
+                        System.out.println("Nivel de avance :" + r.getNivel_avance());
+                        System.out.println("Pautas adicionales :" + r.getRecomendaciones());
+                    }
+                }
+                if(!posee_registro){
+                    System.out.println("Este cliente no tiene ningun registro");
+                }
+            }
+        }
+        if(!existe){
+            System.out.println("El cliente no existe. ¿Ingresaste el codigo bien?");
+        }
+    }
 }
