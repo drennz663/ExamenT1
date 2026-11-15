@@ -1,5 +1,9 @@
 package app;
 
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Entrenador extends Usuario{
     private String especialidad;
     private int anhos_experiencia;
@@ -31,22 +35,61 @@ public class Entrenador extends Usuario{
     public String obtenerRol() {
         return "Entrenador";
     }
-    //Asigno a un entrenador como supervisor de entrenador
+    
+    public static void registrarEntrenador(ArrayList<Entrenador> entrenadores, Scanner sc) {
+
+        System.out.print("Codigo: ");
+        String codigo = sc.nextLine();
+
+        for (Entrenador e : entrenadores) {
+            if (e.getCodigo().equalsIgnoreCase(codigo)) {
+                System.out.println("Entrenador duplicado");
+                return;
+            }
+        }
+
+        System.out.print("Nombre: ");
+        String nombre = sc.nextLine();
+
+        System.out.print("Correo: ");
+        String correo = sc.nextLine();
+
+        System.out.print("Especialidad: ");
+        String especialidad = sc.nextLine();
+
+        System.out.print("Anios de experiencia: ");
+        int experiencia;
+
+        try {
+            experiencia = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Experiencia invalida");
+            return;
+        }
+
+        if (experiencia < 0) {
+            System.out.println("Experiencia invalida");
+            return;
+        }
+
+        Entrenador entrenador = new Entrenador(
+            codigo, nombre, correo, especialidad, experiencia
+        );
+
+        entrenadores.add(entrenador);
+
+        System.out.println("Entrenador agregado correctamente");
+    }
+    // Asigno a otro entrenador como supervisor de este
     public void asignarSupervisor(Entrenador supervisor) {
         if (supervisor == this) {
-            System.out.println("Ud no puede ser su propio supervisor");
+            System.out.println("Un entrenador no puede ser su propio supervisor");
         } else {
             this.supervisor = supervisor;
             System.out.println(supervisor.nombre + " ahora supervisa a " + nombre);
         }
     }
-    
-    public String consultarSupervisor() {
-        if (supervisor == null) {
-            return "Sin supervisor";
-        }
-        return supervisor.nombre;
-    }
 
 
 }
+

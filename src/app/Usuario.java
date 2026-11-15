@@ -10,6 +10,18 @@ public abstract class Usuario {
         this.nombre = nombre;
         this.correoElectronico = correoElectronico;
     }
+    
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getCorreoElectronico() {
+        return correoElectronico;
+    }
 
     public abstract String obtenerRol();
 

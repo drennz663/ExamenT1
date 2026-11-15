@@ -47,4 +47,12 @@ public class Plan {
     public void setCantidad_sesiones(int cantidad_sesiones) {
         this.cantidad_sesiones = cantidad_sesiones;
     }
+
+    public void consultarDatos() {
+        System.out.println("Código: " + codigo);
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Nivel de dificultad: " + nivel_dificultad);
+        System.out.println("Cantidad de sesiones: " + cantidad_sesiones);
+    }
+
 }
