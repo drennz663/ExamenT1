@@ -4,7 +4,7 @@ package app;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Entrenador extends Usuario{
+public class Entrenador extends Usuario implements Evaluable, Reporteable{
     private String especialidad;
     private int anhos_experiencia;
     private Entrenador supervisor;
@@ -15,6 +15,7 @@ public class Entrenador extends Usuario{
         this.anhos_experiencia = anhos_experiencia;
     }
 
+    
     public String getEspecialidad() {
         return especialidad;
     }
@@ -81,13 +82,55 @@ public class Entrenador extends Usuario{
     // Asigno a otro entrenador como supervisor de este
     public void asignarSupervisor(Entrenador supervisor) {
         if (supervisor == this) {
-            System.out.println("Un entrenador no puede ser su propio supervisor");
+            System.out.println("Un entrenador no puede supervisarse a sí mismo.");
+            return;
+        }
+        this.supervisor = supervisor;
+        System.out.println(supervisor.nombre + " ahora supervisa a " + this.nombre);
+    }
+
+    public String consultarSupervisor() {
+        if (supervisor == null) {
+            return "Sin supervisor asignado";
+        }
+        return supervisor.nombre;
+    }
+ // Implementación de Evaluable
+    @Override
+    public void evaluarProgreso(Cliente cliente) {
+        System.out.println("=== Evaluación de progreso ===");
+        System.out.println("Entrenador: " + getNombre() + " (" + especialidad + ")");
+        System.out.println("Cliente: " + cliente.getNombre());
+        System.out.println("Objetivo: " + cliente.getObjetivoEntrenamiento());
+        if (cliente.getPlanAsignado() != null) {
+            System.out.println("Plan: " + cliente.getPlanAsignado().getNombre());
+            System.out.println("Resultado: progreso evaluado según el plan asignado.");
         } else {
-            this.supervisor = supervisor;
-            System.out.println(supervisor.nombre + " ahora supervisa a " + nombre);
+            System.out.println("Resultado: el cliente aún no tiene un plan asignado.");
         }
     }
 
+    // Implementación de Reporteable
+    @Override
+    public String generarReporte(Cliente cliente) {
+        String plan = (cliente.getPlanAsignado() != null)
+                ? cliente.getPlanAsignado().getNombre() : "Sin plan";
+        return "REPORTE DE SEGUIMIENTO\n"
+             + "Cliente: " + cliente.getNombre() + "\n"
+             + "Objetivo: " + cliente.getObjetivoEntrenamiento() + "\n"
+             + "Plan: " + plan + "\n"
+             + "Entrenador responsable: " + getNombre()
+             + " (" + anhos_experiencia + " años de experiencia)";
+    }
+
+
+    @Override
+    public void mostrarDatos() {
+        super.mostrarDatos();
+        System.out.println("Especialidad: " + especialidad);
+        System.out.println("Años de experiencia: " + anhos_experiencia);
+        System.out.println("Supervisor: " + consultarSupervisor());
+    }
 
 }
 
