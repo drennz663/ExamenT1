@@ -1,5 +1,6 @@
 package app;
 
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -79,5 +80,16 @@ public class Entrenador extends Usuario{
 
         System.out.println("Entrenador agregado correctamente");
     }
+    // Asigno a otro entrenador como supervisor de este
+    public void asignarSupervisor(Entrenador supervisor) {
+        if (supervisor == this) {
+            System.out.println("Un entrenador no puede ser su propio supervisor");
+        } else {
+            this.supervisor = supervisor;
+            System.out.println(supervisor.nombre + " ahora supervisa a " + nombre);
+        }
+    }
+
 
 }
+
