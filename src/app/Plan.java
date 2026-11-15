@@ -1,10 +1,10 @@
 package app;
 
 public class Plan {
-    private String codigo;
-    private String nombre;
-    private String nivel_dificultad;
-    private int cantidad_sesiones;
+	protected String codigo;
+	protected String nombre;
+	protected String nivel_dificultad;
+	protected int cantidad_sesiones;
 
     public Plan(String codigo, String nombre, String nivel_dificultad, int cantidad_sesiones) {
         this.codigo = codigo;
@@ -54,5 +54,6 @@ public class Plan {
         System.out.println("Nivel de dificultad: " + nivel_dificultad);
         System.out.println("Cantidad de sesiones: " + cantidad_sesiones);
     }
+
 
 }

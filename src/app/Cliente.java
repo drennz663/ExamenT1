@@ -1,13 +1,14 @@
-
 package app;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //herenciavr02
 public class Cliente extends Usuario {
 
     private int edad;
     private String objetivoEntrenamiento;
-    private Plan planAsignado;
+    protected Plan planAsignado;
+    private int telefono;
 
     public Cliente(String codigo, String nombre, String correoElectronico, int edad, String objetivoEntrenamiento) {
         super(codigo, nombre, correoElectronico);
@@ -53,19 +54,47 @@ public class Cliente extends Usuario {
             System.out.println("El cliente no tiene un plan asignado.");
         }
     }
-    
-    public static void registrarCliente(ArrayList<Cliente> clientes, Cliente cliente) {
 
-        for (Cliente c : clientes) {
-            if (c.getCodigo().equals(cliente.getCodigo())) {
-                System.out.println("Cliente duplicado");
-                return;
-            }
-        }
+	public static void registrarCliente(ArrayList<Cliente> clientes, Scanner sc) {
 
-        clientes.add(cliente);
-        System.out.println("Cliente agregado correctamente");
-    }
+		System.out.print("Codigo: ");
+		String codigo = sc.nextLine();
 
+		for (Cliente c : clientes) {
+			if (c.getCodigo().equalsIgnoreCase(codigo)) {
+				System.out.println("Cliente duplicado");
+				return;
+			}
+		}
+
+		System.out.print("Nombre: ");
+		String nombre = sc.nextLine();
+
+		System.out.print("Correo: ");
+		String correo = sc.nextLine();
+
+		int edad;
+		try {
+			System.out.print("Edad: ");
+			edad = Integer.parseInt(sc.nextLine());
+		} catch (NumberFormatException e) {
+			System.out.println("Edad invalida");
+			return;
+		}
+
+		if (edad <= 0) {
+			System.out.println("Edad invalida");
+			return;
+		}
+
+		System.out.print("Objetivo: ");
+		String objetivo = sc.nextLine();
+
+		Cliente cliente = new Cliente(codigo, nombre, correo, edad, objetivo);
+
+		clientes.add(cliente);
+
+		System.out.println("Cliente agregado correctamente");
+	}
 
 }
