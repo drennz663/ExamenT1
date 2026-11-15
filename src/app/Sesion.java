@@ -83,7 +83,7 @@ public class Sesion {
         System.out.print("Codigo: ");
         String codigo = sc.nextLine();
 
-        System.out.print("Fecha (AAAA-MM-DD): ");
+        System.out.print("Fecha(AAAA-MM-DD)");
         LocalDate fecha = LocalDate.parse(sc.nextLine());
 
         System.out.print("Duracion en minutos: ");
@@ -108,7 +108,7 @@ public class Sesion {
 
             if (sesion.getCodigo().equalsIgnoreCase(codigo)) {
 
-                System.out.println("===== DETALLES DE LA SESION =====");
+                System.out.println("DETALLES DE LA SESION");
                 System.out.println("Codigo: " + sesion.getCodigo());
                 System.out.println("Fecha: " + sesion.getFecha());
                 System.out.println("Duracion: " + sesion.getDuracion_minutos() + " minutos");
