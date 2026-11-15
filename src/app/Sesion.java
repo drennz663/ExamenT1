@@ -76,7 +76,7 @@ public class Sesion {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-
+ //registgrar
     public static void registrarSesion(Scanner sc) {
         System.out.println("Registrar Sesion");
 
