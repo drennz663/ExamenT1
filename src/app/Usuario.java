@@ -1,9 +1,9 @@
 package app;
 
 public abstract class Usuario {
-    private String codigo;
+	protected String codigo;
     protected String nombre;
-    private String correoElectronico;
+    protected String correoElectronico;
 
     public Usuario(String codigo, String nombre, String correoElectronico) {
         this.codigo = codigo;
