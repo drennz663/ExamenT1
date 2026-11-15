@@ -1,17 +1,31 @@
 package app;
 
+<<<<<<< HEAD
+=======
+import java.time.LocalDate;
+>>>>>>> 7727c1fc2e68c62c06741add7500611f518ce19a
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Principal {
 
     static Scanner sc = new Scanner(System.in);
+<<<<<<< HEAD
     
     static ArrayList<Cliente> clientes = new ArrayList<>();
     static ArrayList<Entrenador> entrenadores = new ArrayList<>();
     
     public static void main(String[] args) {
     	entrenadores.add(new Entrenador("001", "Administrador", "admin@smartfit.com", "Administracion", 10));
+=======
+    static ArrayList<Cliente> clientes = new ArrayList<>();
+    static ArrayList<Entrenador> entrenadores = new ArrayList<>();
+    static ArrayList<Registro> registros = new ArrayList<>();
+    public static void main(String[] args) {
+    	entrenadores.add(new Entrenador("001", "Administrador", "admin@smartfit.com", "Administracion", 10));
+        clientes.add(new Cliente("002","unCliente","SoyunCliente@gmail.com",21,"Salud"));
+        registros.add(new Registro("R01",clientes.get(0),entrenadores.get(0),LocalDate.parse("2026-01-01"),4 ,"Mantener una dieta estable"));
+>>>>>>> 7727c1fc2e68c62c06741add7500611f518ce19a
         int opcion;
         do {
             System.out.println("=====Inicio de Sesion====");
@@ -86,7 +100,7 @@ public class Principal {
                     //Asignar
                     break;
                 case 4:
-                    //Progreso
+                    Cliente.consultarProgreso(clientes,registros,sc);
                     break;
                 case 0 :
                     break;
@@ -209,7 +223,11 @@ public static void menuCliente(Cliente cliente) {
                 break;
 
             case 3:
+<<<<<<< HEAD
                 //cliente.consultarProgreso();
+=======
+                Cliente.consultarProgreso(clientes,registros,sc);
+>>>>>>> 7727c1fc2e68c62c06741add7500611f518ce19a
                 break;
 
             case 0:
