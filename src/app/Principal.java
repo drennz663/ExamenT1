@@ -1,10 +1,13 @@
 package app;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Principal {
 
     static Scanner sc = new Scanner(System.in);
+    static ArrayList<Cliente> clientes = new ArrayList<>();
+    static ArrayList<Entrenador> entrenadores = new ArrayList<>();
     public static void main(String[] args) {
         int opcion;
         do {
@@ -71,7 +74,7 @@ public class Principal {
             opcion = leerEntero("Opcion: ");
             switch(opcion) {
                 case 1 :
-                    //Crear
+                	Cliente.registrarCliente(clientes, sc);
                     break;
                 case 2 :
                     //Consultar
@@ -103,7 +106,7 @@ public class Principal {
             opcion = leerEntero("Opcion: ");
             switch(opcion) {
                 case 1 :
-                    //registrar
+                	Entrenador.registrarEntrenador(entrenadores, sc);
                     break;
                 case 2 :
                     //consultar

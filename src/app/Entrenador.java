@@ -1,6 +1,7 @@
 package app;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Entrenador extends Usuario{
     private String especialidad;
@@ -34,17 +35,48 @@ public class Entrenador extends Usuario{
         return "Entrenador";
     }
     
-    public static void registrarEntrenador(
-            ArrayList<Entrenador> entrenadores, Entrenador entrenador) {
+    public static void registrarEntrenador(ArrayList<Entrenador> entrenadores, Scanner sc) {
+
+        System.out.print("Codigo: ");
+        String codigo = sc.nextLine();
 
         for (Entrenador e : entrenadores) {
-            if (e.getCodigo().equals(entrenador.getCodigo())) {
+            if (e.getCodigo().equalsIgnoreCase(codigo)) {
                 System.out.println("Entrenador duplicado");
                 return;
             }
         }
 
+        System.out.print("Nombre: ");
+        String nombre = sc.nextLine();
+
+        System.out.print("Correo: ");
+        String correo = sc.nextLine();
+
+        System.out.print("Especialidad: ");
+        String especialidad = sc.nextLine();
+
+        System.out.print("Anios de experiencia: ");
+        int experiencia;
+
+        try {
+            experiencia = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Experiencia invalida");
+            return;
+        }
+
+        if (experiencia < 0) {
+            System.out.println("Experiencia invalida");
+            return;
+        }
+
+        Entrenador entrenador = new Entrenador(
+            codigo, nombre, correo, especialidad, experiencia
+        );
+
         entrenadores.add(entrenador);
+
         System.out.println("Entrenador agregado correctamente");
     }
 
