@@ -1,5 +1,6 @@
 package app;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Principal {
@@ -10,12 +11,15 @@ public class Principal {
         do {
             System.out.println("=====Inicio de Sesion====");
             System.out.println("1._ Iniciar Sesion");
+            System.out.println("4._ sesion Gestion");
             System.out.println("0._ Salir");
             opcion = leerEntero("Opcion: ");
             switch(opcion) {
                 case 1 :
                     //IniciarSesion();
                     break;
+                case 4:
+                    sesionGestion();
                 case 0 :
                     System.out.println("Vuelve pronto!");
                     break;
@@ -147,32 +151,35 @@ public class Principal {
         sc.close();
     }
 
-    public static void sesionGestion(){
+    public static void sesionGestion() {
         int opcion;
+
         do {
-            System.out.println("=====Seccion de Sesion====");
-            System.out.println("1._ Registrar una nueva sesion");
-            System.out.println("2._ Consultar detalles de la sesion");
-            System.out.println("3._ Marcar sesion como completada");
+            System.out.println("===== Seccion de Sesion =====");
+            System.out.println("1. Registrar una nueva sesion");
+            System.out.println("2. Consultar detalles de la sesion");
+            System.out.println("3. Marcar sesion como completada");
             System.out.println("0. Volver");
+
             opcion = leerEntero("Opcion: ");
-            switch(opcion) {
-                case 1 :
-                    //registrar
+
+            switch (opcion) {
+                case 1:
+                    Sesion.registrarSesion(sc);
                     break;
-                case 2 :
-                    //consultar
+                case 2:
+                    Sesion.consultarSesion(sc);
                     break;
-                case 3 :
-                    //completar
+                case 3:
+                    Sesion.completarSesion(sc);
                     break;
-                case 0 :
+                case 0:
                     break;
-                default :
+                default:
                     System.out.println("Opcion no valida");
             }
+
         } while (opcion != 0);
-        sc.close();
     }
 
     public void consultarProgreso(){
